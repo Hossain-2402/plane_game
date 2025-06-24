@@ -66,7 +66,7 @@ void make_background(){
 
 
 		unsigned int game_background_image_up = iLoadImage("reverse_background_2.jpg");
-		iShowImage((background_left + dist) * vw, 90 * vh, 100 * vw, 7 * vh, game_background_image_up);
+		iShowImage((background_left + dist) * vw, 33.5 * vh, 100 * vw, 51 * vh, game_background_image_up);
 
 
 		
