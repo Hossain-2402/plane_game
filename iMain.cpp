@@ -7,7 +7,6 @@
 const float vh = 9;
 const int vw = 16;
 
-char images[4][100] = { "ball_1.png", "ball_2.png", "ball_3.png", "ball_4.png" };
 int index = 0;
 
 int play_button_clicked = 0;
@@ -40,7 +39,7 @@ void move_car(){
 int bottom_tower = 20;
 int up_tower = 40;
 
-int left = 20;
+int left = 40;
 
 void make_buildings(){
 	int random_number = rand() % 60;
@@ -50,10 +49,10 @@ void make_buildings(){
 		int tower_image_reverse_x = 50 ;
 
 		unsigned int tower_image = iLoadImage("tower_image.png");
-		iShowImage((left + tower_image_x + (i*50)) * vw, 12.5 * vh, 15 * vw, 55 * vh, tower_image);
+		iShowImage((left  + (i*50)) * vw, 12.5 * vh, 15 * vw, 55 * vh, tower_image);
 
 		unsigned int tower_image_reverse = iLoadImage("tower_image_reverse.png");
-		iShowImage((left+35+tower_image_reverse_x + + (i*50))* vw, 32.5 * vh, 15 * vw, 55 * vh, tower_image_reverse);
+		iShowImage(((left+25) + (i*50))* vw, 32.5 * vh, 15 * vw, 55 * vh, tower_image_reverse);
 	}
 }
 
@@ -96,18 +95,13 @@ void play_screen(){
 
 
 	unsigned int plane_image = iLoadImage("plane_image_2.png");
-	iShowImage(5*vw, plane_y * vh, 15 * vw, 15 * vh, plane_image);
-
-
-//	unsigned int tower_image = iLoadImage("tower_image.png");
-//	iShowImage(20 * vw, 12.5 * vh, 15 * vw, 45 * vh, tower_image);
-
-//	unsigned int tower_image_reverse = iLoadImage("tower_image_reverse.png");
-//	iShowImage(40 * vw, 43.5 * vh, 15 * vw, 45 * vh, tower_image_reverse);
+	iShowImage(5 * vw, plane_y * vh, 15 * vw, 15 * vh, plane_image);
 
 
 	make_buildings();
 	move_buildings();
+
+
 	
 }
 
