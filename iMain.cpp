@@ -43,32 +43,57 @@ int up_tower = 40;
 int left = 20;
 
 void make_buildings(){
-	for (int i = 1; i < 100; i++){
+	int random_number = rand() % 60;
+	int add = (random_number < 30) ? random_number + 30 : random_number;
+	for (int i = 0; i < 10; i++){
 		int tower_image_x = 50 ;
 		int tower_image_reverse_x = 50 ;
 
 		unsigned int tower_image = iLoadImage("tower_image.png");
-		iShowImage((left + tower_image_x) * vw, 12.5 * vh, 15 * vw, 55 * vh, tower_image);
+		iShowImage((left + tower_image_x + (i*50)) * vw, 12.5 * vh, 15 * vw, 55 * vh, tower_image);
 
 		unsigned int tower_image_reverse = iLoadImage("tower_image_reverse.png");
-		iShowImage((left+35+tower_image_reverse_x)* vw, 33.5 * vh, 15 * vw, 55 * vh, tower_image_reverse);
+		iShowImage((left+35+tower_image_reverse_x + + (i*50))* vw, 33.5 * vh, 15 * vw, 55 * vh, tower_image_reverse);
+	}
+}
+
+int background_left = 0;
+void make_background(){
+	for (int i = 0; i < 10; i++){
+		int dist = i * 100;
+		unsigned int game_background_image_down = iLoadImage("background_2.jpg");
+		iShowImage((background_left + dist) * vw, 0, 100 * vw, 51 * vh, game_background_image_down);
+
+
+		unsigned int game_background_image_up = iLoadImage("reverse_background_2.jpg");
+		iShowImage((background_left + dist) * vw, 90 * vh, 100 * vw, 7 * vh, game_background_image_up);
+
+
+		
 	}
 }
 
 void move_buildings(){
-	left--;
-	if (left < -80) left = 20;
+	left -= 10;
 }
 
+
+void move_background(){
+	background_left -= 10;
+}
 
 
 void play_screen(){
 
-	unsigned int game_background_image_down = iLoadImage("background_2.jpg");
-	iShowImage(0, 0, 100 * vw, 51 * vh, game_background_image_down);
+//	unsigned int game_background_image_down = iLoadImage("background_2.jpg");
+//	iShowImage(0, 0, 100 * vw, 51 * vh, game_background_image_down);
 
-	unsigned int game_background_image_up = iLoadImage("reverse_background_2.jpg");
-	iShowImage(0, 50*vh, 100 * vw, 51 * vh, game_background_image_up);
+
+	make_background();
+	move_background();
+
+//	unsigned int game_background_image_up = iLoadImage("reverse_background_2.jpg");
+//	iShowImage(0, 50*vh, 100 * vw, 51 * vh, game_background_image_up);
 
 
 
