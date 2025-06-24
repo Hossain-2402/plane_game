@@ -53,7 +53,7 @@ void make_buildings(){
 		iShowImage((left + tower_image_x + (i*50)) * vw, 12.5 * vh, 15 * vw, 55 * vh, tower_image);
 
 		unsigned int tower_image_reverse = iLoadImage("tower_image_reverse.png");
-		iShowImage((left+35+tower_image_reverse_x + + (i*50))* vw, 33.5 * vh, 15 * vw, 55 * vh, tower_image_reverse);
+		iShowImage((left+35+tower_image_reverse_x + + (i*50))* vw, 32.5 * vh, 15 * vw, 55 * vh, tower_image_reverse);
 	}
 }
 
@@ -66,7 +66,7 @@ void make_background(){
 
 
 		unsigned int game_background_image_up = iLoadImage("reverse_background_2.jpg");
-		iShowImage((background_left + dist) * vw, 33.5 * vh, 100 * vw, 51 * vh, game_background_image_up);
+		iShowImage((background_left + dist) * vw, 49 * vh, 100 * vw, 51 * vh, game_background_image_up);
 
 
 		
@@ -85,15 +85,9 @@ void move_background(){
 
 void play_screen(){
 
-//	unsigned int game_background_image_down = iLoadImage("background_2.jpg");
-//	iShowImage(0, 0, 100 * vw, 51 * vh, game_background_image_down);
-
 
 	make_background();
 	move_background();
-
-//	unsigned int game_background_image_up = iLoadImage("reverse_background_2.jpg");
-//	iShowImage(0, 50*vh, 100 * vw, 51 * vh, game_background_image_up);
 
 
 
