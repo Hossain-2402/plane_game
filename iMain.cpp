@@ -3,145 +3,77 @@
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::Idraw Here::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::://
 
 
-
-const float vh = 9;
-const int vw = 16;
-
-int index = 0;
-
-int play_button_clicked = 0;
-
-int car_x = -20;
-
-float plane_y = 45;
+int vh = 9;
+int vw = 16;
 
 
 
+unsigned int game_background_image_down;
+unsigned int game_background_image_up;
+
+unsigned int tower_image;
+unsigned int tower_image_reverse;
+
+unsigned int plane_image;
+
+double background_left = 0;
+double left = 40;
+int plane_y = 45;
+
+void make_background(){
+	for (int i = 0; i < 50; i++){
+		int dist = i * 100;
+		iShowImage((background_left + dist) * vw, 0, 100 * vw, 51 * vh, game_background_image_down);
 
 
-void rotate_ball(){
-	index++;
+		iShowImage((background_left + dist) * vw, 49 * vh, 100 * vw, 51 * vh, game_background_image_up);
 
-	if (index > 3) index = 0;
 
-}
 
-void move_car(){
-	car_x ++;
-
-	if (car_x > 100){
-		car_x = -19;
 	}
-
 }
 
+void move_background(){
+	background_left -= 0.005;
+}
 
-int bottom_tower = 20;
-int up_tower = 40;
-
-int left = 40;
 
 void make_buildings(){
 	int random_number = rand() % 60;
 	int add = (random_number < 30) ? random_number + 30 : random_number;
-	for (int i = 0; i < 10; i++){
-		int tower_image_x = 50 ;
-		int tower_image_reverse_x = 50 ;
+	for (int i = 0; i < 50; i++){
+		int tower_image_x = 50;
+		int tower_image_reverse_x = 50;
 
-		unsigned int tower_image = iLoadImage("tower_image.png");
-		iShowImage((left  + (i*50)) * vw, 12.5 * vh, 15 * vw, 55 * vh, tower_image);
+		iShowImage((left + (i * 50)) * vw, 12.5 * vh, 15 * vw, 55 * vh, tower_image);
 
-		unsigned int tower_image_reverse = iLoadImage("tower_image_reverse.png");
-		iShowImage(((left+25) + (i*50))* vw, 32.5 * vh, 15 * vw, 55 * vh, tower_image_reverse);
-	}
-}
-
-int background_left = 0;
-void make_background(){
-	for (int i = 0; i < 10; i++){
-		int dist = i * 100;
-		unsigned int game_background_image_down = iLoadImage("background_2.jpg");
-		iShowImage((background_left + dist) * vw, 0, 100 * vw, 51 * vh, game_background_image_down);
-
-
-		unsigned int game_background_image_up = iLoadImage("reverse_background_2.jpg");
-		iShowImage((background_left + dist) * vw, 49 * vh, 100 * vw, 51 * vh, game_background_image_up);
-
-
-		
+		iShowImage(((left + 25) + (i * 50))* vw, 32.5 * vh, 15 * vw, 55 * vh, tower_image_reverse);
 	}
 }
 
 void move_buildings(){
-	left -= 10;
+	left -= 0.005;
+}
+
+void make_plane(){
+
+	iShowImage(5 * vw, plane_y * vh, 15 * vw, 15 * vh, plane_image);
 }
 
 
-void move_background(){
-	background_left -= 10;
-}
+void iDraw()
+{
+	iClear();
 
-
-void play_screen(){
 
 
 	make_background();
 	move_background();
 
-
-
-	unsigned int back_button = iLoadImage("back_button_image.png");
-	iShowImage(-2.5 * vw, 90 * vh, 15 * vw, 7 * vh, back_button);
-
-
-	unsigned int plane_image = iLoadImage("plane_image_2.png");
-	iShowImage(5 * vw, plane_y * vh, 15 * vw, 15 * vh, plane_image);
-
+	make_plane();
 
 	make_buildings();
 	move_buildings();
-
-
-	
-}
-
-void iDraw()
-{
-	
-	
-	
-	iClear();
-
-
-
-
-
-	unsigned int image = iLoadImage("wallpaper.jpg");
-	iShowImage(0, 0, 100 * vw, 100 * vh, image);
-
-	iSetColor(0, 255, 0);
-	iFilledRectangle(30 * vw, 80 * vh, 40 * vw, 10 * vh);
-	iSetColor(0,0,0);
-	iText(48 * vw, 84 * vh, "Play", GLUT_BITMAP_HELVETICA_18);
-
-
-	iSetColor(245, 245, 220);
-	iFilledRectangle(30 * vw, 60 * vh, 40 * vw, 10 * vh);
-	iSetColor(0, 0, 0);
-	iText(47 * vw, 64 * vh, "History", GLUT_BITMAP_HELVETICA_18);
-
-	iSetColor(173, 216, 230);
-	iFilledRectangle(30 * vw, 40 * vh, 40 * vw, 10 * vh);
-	iSetColor(0,0,0);
-	iText(47 * vw, 44 * vh, "Settings", GLUT_BITMAP_HELVETICA_18);
-
-	iSetColor(255, 0, 0);
-	iFilledRectangle(30 * vw, 20 * vh, 40 * vw, 10 * vh);
-	iSetColor(255,255,255);
-	iText(48 * vw, 24 * vh, "Quit", GLUT_BITMAP_HELVETICA_18);
-
-
-	if (play_button_clicked) play_screen();
 
 
 
@@ -168,16 +100,10 @@ void iPassiveMouseMove(int mx, int my)
 
 void iMouse(int button, int state, int mx, int my)
 {
-	/*
-
-
-	*/
 	
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
-		if ((mx >= 30 * vw && mx <= 70 * vw) && (my >= 80 * vh && my <= 90 * vh)) play_button_clicked = 1;
 
-		if ((mx >= 2.5 * vw && mx <= 12.5 * vw) && (my >= 90 * vh && my <= 95 * vh)) play_button_clicked = 0;
 		
 	}
 	
@@ -237,16 +163,21 @@ void iSpecialKeyboard(unsigned char key)
 	
 }
 
-void iTimer() {
-	move_car();
-}
 
 int main()
 {
-	///srand((unsigned)time(NULL));
+	iInitialize(100*vw, 100*vh, "Project Title");
 
-	iInitialize(100*vw, 100*vh, "First game");
-	///updated see the documentations
+
+	game_background_image_down = iLoadImage("background_2.jpg");
+	game_background_image_up = iLoadImage("reverse_background_2.jpg");
+
+	tower_image = iLoadImage("tower_image.png");
+	tower_image_reverse = iLoadImage("tower_image_reverse.png");
+
+	plane_image = iLoadImage("plane_image_2.png");
+
+
 	iStart();
 	return 0;
 }
